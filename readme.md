@@ -1,5 +1,3 @@
-This file that explains how to use Muuri.js and update the `data-index` attribute of items when the layout changes:
-
 # Muuri.js
 
 Muuri.js is a powerful and flexible JavaScript library for creating responsive, sortable, and draggable grid layouts. It provides a simple API for managing and manipulating grid items with smooth animations.
@@ -16,7 +14,7 @@ Muuri.js is a powerful and flexible JavaScript library for creating responsive, 
 2. Set up the HTML structure for the grid container and the individual grid items. Assign an initial value to the `data-index` attribute for each item:
 
 ```html
-<div id="grid-container">
+<div id="grid">
   <div class="item" data-index="1">Item 1</div>
   <div class="item" data-index="2">Item 2</div>
   <div class="item" data-index="3">Item 3</div>
@@ -27,24 +25,42 @@ Muuri.js is a powerful and flexible JavaScript library for creating responsive, 
 3. Initialize the grid using Muuri.js:
 
 ```javascript
-var grid = new Muuri('#grid-container', {
+var grid = new Muuri('#grid', {
   // Grid options go here
 });
 ```
 
-4. Update the `data-index` attribute of items when the layout changes:
+## Updating the _sortData Attribute
 
-```javascript
-function updateDataIndex() {
-  grid.getItems().forEach(function(item, index) {
-    item.getElement().setAttribute('data-index', index + 1);
-  });
-}
+To update the `_sortData` attribute of items in Muuri.js, follow these steps:
 
-grid.on('layoutEnd', updateDataIndex);
-```
+1. Access the grid items using the `getItems()` method:
 
-In the above example, we create a function called `updateDataIndex()` that updates the `data-index` attribute of each item in the grid. This function is called whenever the `layoutEnd` event is triggered, indicating the end of a layout change.
+   ```javascript
+   var items = grid.getItems();
+   ```
+
+2. Iterate over the items and update the `_sortData` attribute:
+
+   ```javascript
+   items.forEach(function(item, index) {
+     item._sortData.index = index + 1;
+   });
+   ```
+
+3. Trigger a layout update using the `layout()` method to reflect the changes:
+
+   ```javascript
+   grid.layout();
+   ```
+
+By following the above steps, you can dynamically update the `_sortData` attribute of items in the grid.
+
+Please note that this example assumes a basic setup. Refer to the Muuri.js documentation for advanced configuration options and additional features.
+
+For more information on how to use Muuri.js, check out the [official documentation](https://muuri.dev/).
+
+Feel free to adjust the content and formatting of the `README.md` file to meet your specific requirements and project structure.
 
 ## Customization
 
